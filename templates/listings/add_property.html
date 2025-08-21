@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="col-md-6 border p-4 rounded bg-light">
+    <h2 class="text-center mb-4">Add New Property</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary w-100">Save</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

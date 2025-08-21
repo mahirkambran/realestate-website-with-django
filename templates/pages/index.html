@@ -1,0 +1,173 @@
+{% extends 'base.html' %} {% load humanize %} {% block title %}
+| Welcome {% endblock title %} {% block content %}
+<!-- Showcase / Hero -->
+
+<section id="showcase" class="d-flex align-items-center">
+  <div class="container text-center text-white">
+    <h1 class="display-4 mb-3 fw-bold">Property Searching Just Got So Easy</h1>
+    <p class="lead mb-4">
+      Find your dream home with just a few clicks. Explore the latest listings
+      in your area today.
+    </p>
+
+    <!-- Floating Search Form -->
+    <div
+      class="search shadow-lg rounded-lg bg-white p-4 mx-auto"
+      style="max-width: 900px"
+    >
+      <form action="{% url 'search' %}">
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <input
+              type="text"
+              name="keywords"
+              class="form-control form-control-lg"
+              placeholder="Keyword (Pool, Garage, etc)"
+            />
+          </div>
+          <div class="col-md-4 mb-3">
+            <input
+              type="text"
+              name="city"
+              class="form-control form-control-lg"
+              placeholder="City"
+            />
+          </div>
+          <div class="col-md-4 mb-3">
+            <select name="state" class="form-control form-control-lg">
+              <option selected disabled>Localities (All)</option>
+              {% for key,value in state_choices.items %}
+              <option value="{{ key }}">{{ value }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <select name="bedrooms" class="form-control form-control-lg">
+              <option selected disabled>Bedrooms (All)</option>
+              {% for key,value in bedroom_choices.items %}
+              <option value="{{ key }}">{{ value }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <select name="price" class="form-control form-control-lg">
+              <option selected disabled>Max Price (Any)</option>
+              {% for key,value in price_choices.items %}
+              <option value="{{ key }}">{{ value }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-gradient btn-lg btn-block mt-2" type="submit">
+          Search Properties
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
+
+<!-- Listings -->
+<section id="listings" class="py-5">
+  <div class="container">
+    <h3 class="text-center mb-5 fw-bold">Latest Listings</h3>
+    <div class="row">
+      {% if listings %} {% for listing in listings %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card listing-preview h-100 shadow-sm rounded-lg border-0">
+          <div class="image-wrapper">
+            <img
+              src="{{ listing.photo_main.url }}"
+              alt="{{ listing.title }}"
+              class="card-img-top"
+            />
+          </div>
+          <div class="card-img-overlay d-flex justify-content-end p-2">
+            <span class="badge badge-gradient p-2" style="pointer-events: none">
+              Rs. {{ listing.price|intcomma }}/-
+            </span>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h5 class="text-primary fw-bold">{{ listing.title }}</h5>
+            <p>
+              <i class="fas fa-map-marker-alt text-danger"></i> {{ listing.city
+              }}, {{ listing.state }} {{ listing.zipcode }}
+            </p>
+            <hr />
+            <p class="small mb-2">
+              <i class="fas fa-th-large"></i> {{ listing.sqft }} Sqft
+            </p>
+            <p class="small mb-2">
+              <i class="fas fa-car"></i> Garage: {{ listing.garage }}
+            </p>
+            <p class="small mb-2">
+              <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}
+            </p>
+            <p class="small mb-2">
+              <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}
+            </p>
+            <p class="small text-muted">
+              <i class="fas fa-clock"></i> {{ listing.list_date|timesince }} ago
+            </p>
+            <a
+              href="{% url 'listing' listing.id %}"
+              class="btn btn-outline-primary mt-auto"
+              >More Info</a
+            >
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="col-md-12 text-center">
+        <p class="text-muted">No Listings Available</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="py-5 bg-light">
+  <div class="container">
+    <h3 class="text-center fw-bold mb-5">Our Services</h3>
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="service-box p-4 shadow-sm rounded">
+          <div class="icon-circle mb-3">
+            <i class="fas fa-comment fa-2x"></i>
+          </div>
+          <h5>Consulting Services</h5>
+          <p class="text-muted">
+            Get expert advice on buying, selling, and investing in real estate.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="service-box p-4 shadow-sm rounded">
+          <div class="icon-circle mb-3"><i class="fas fa-home fa-2x"></i></div>
+          <h5>Property Management</h5>
+          <p class="text-muted">
+            We manage your property with utmost care and professionalism.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="service-box p-4 shadow-sm rounded">
+          <div class="icon-circle mb-3">
+            <i class="fas fa-suitcase fa-2x"></i>
+          </div>
+          <h5>Renting & Selling</h5>
+          <p class="text-muted">
+            From rentals to sales, we make the process smooth and profitable.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

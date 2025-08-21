@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} | Enquiry {% endblock %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Property Enquiry</h2>
+    <form method="POST" action="">
+      {% csrf_token %}
+    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+    <input type="hidden" name="realtor_id" value="{{ realtor.id }}">
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" class="form-control" rows="5" required></textarea>
+      </div>
+      <button class="btn btn-primary btn-block" type="submit">Send Enquiry</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

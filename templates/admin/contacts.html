@@ -1,0 +1,63 @@
+{% extends 'admin/adminbase.html' %}
+
+{% block content %}
+
+<div class="container-fluid page-body-wrapper">
+    <div class="main-panel">
+        <div class="content-wrapper">
+
+            <!-- Contact Messages Listing -->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Contact Messages</h4>
+                            <div class="table-responsive">
+                                <table class="table table-striped project-orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Message</th>
+                                            <th>Received At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for contact in contacts %}
+                                            <tr>
+                                                <td>{{ contact.id }}</td>
+                                                <td>{{ contact.name }}</td>
+                                                <td>{{ contact.email }}</td>
+                                                <td>{{ contact.message }}</td>
+                                                <td>{{ contact.created_at }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- content-wrapper ends -->
+        <footer class="footer">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024 <a href="https://www.bootstrapdash.com/" class="text-muted" target="_blank">Bootstrapdash</a>.  All rights reserved.</span>
+                        
+                    </div>
+                </div>    
+            </div>        
+        </footer>
+        <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+</div>
+
+{% endblock %}
+
+

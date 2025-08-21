@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| Login
+{% endblock title %}
+
+{% load humanize %}
+
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-black">
+    <div class="container p-5 "  >
+        <div class="row text-center">
+            <div class="col-md-6 offset-md-3">
+                <div class="bg-primary">
+                <h1 class="display-4">Welcome Realtor</h1>
+                {% comment %} <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p> {% endcomment %}
+                <p class="lead">If you are not registered <a class="register" href="{%url 'realtor_create'%}">Register</a></p>
+               
+                <h1>All Realtor</h1>
+                </div>
+                  <form method="POST" >
+                    {% csrf_token %}
+                    {{ realtor_login_form.as_p}}
+                 <input type="Submit" value="login">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% comment %} {% include 'accounts/register.html' %} {% endcomment %}
+
+
+
+{% endblock content %}

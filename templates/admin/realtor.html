@@ -1,0 +1,133 @@
+{% extends 'admin/adminbase.html' %} {% block content %}
+
+<div class="container-fluid page-body-wrapper">
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <!-- Add New Realtor Link -->
+      <div class="row mt-3">
+        <div class="col-md-12 text-end">
+            
+          <a href="{% url 'addnew_realtor' %}" class="btn btn-primary btn-sm"
+            >Add New Realtor</a
+          >
+        </div>
+      </div>
+
+      <!-- Real Estate Listings -->
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Real Estate Listings</h4>
+              <div class="table-responsive">
+                <table class="table table-striped project-orders-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Photo</th>
+                      <th>Description</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th>Hire Date</th>
+                      <th>User</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for realtor in realtors %}
+                    <tr>
+                      <td>{{ realtor.name }}</td>
+                      <td>{{ realtor.photo }}</td>
+                      <td>{{ realtor.description }}</td>
+                      <td>{{ realtor.phone}}</td>
+                      <td>{{ realtor.email }}</td>
+                      <td>{{ realtor.hire_date }}</td>
+                      <td>{{ realtor.user }}</td>
+                      {% comment %}
+                      <td>{{ realtor.actions }}</td>
+                      {% endcomment %}
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <!-- Edit Button -->
+                          <a
+                            href="{% url 'edit_realtor' realtor.id %}"
+                            class="btn btn-success btn-sm btn-icon-text me-3"
+                          >
+                            Edit
+                            <i class="typcn typcn-edit btn-icon-append"></i>
+                          </a>
+
+                          <!-- Delete Button (form with CSRF protection) -->
+                          <form
+                            action="{% url 'delete_realtor' realtor.id %}"
+                            method="post"
+                            style="display: inline"
+                          >
+                            {% csrf_token %}
+                            <button
+                              type="submit"
+                              class="btn btn-danger btn-sm btn-icon-text"
+                              onclick="return confirm('Are you sure you want to delete {{ realtor.name }}?');"
+                            >
+                              Delete
+                              <i
+                                class="typcn typcn-delete-outline btn-icon-append"
+                              ></i>
+                            </button>
+                              
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <footer class="footer">
+      <div class="card">
+        <div class="card-body">
+          <div
+            class="d-sm-flex justify-content-center justify-content-sm-between"
+          >
+            <span
+              class="text-muted text-center text-sm-left d-block d-sm-inline-block"
+              >Copyright © 2024
+              <a
+                href="https://www.bootstrapdash.com/"
+                class="text-muted"
+                target="_blank"
+                >Bootstrapdash</a
+              >. All rights reserved.</span
+            >
+            <span
+              class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center text-muted"
+              >Hand-crafted & made with
+              <i class="typcn typcn-heart-full-outline text-danger"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- partial -->
+  </div>
+  <!-- main-panel ends -->
+</div>
+
+{% endblock %} {% comment %}
+<!-- Add New Realtor Link -->
+<div class="row mt-3">
+  <div class="col-md-12 text-end">
+    <a href="{% url 'realtor_create' %}" class="btn btn-primary btn-sm"
+      >Add New Realtor</a
+    >
+  </div>
+</div>
+{% endcomment %}
+
+<!-- Add New Realtor Form -->
