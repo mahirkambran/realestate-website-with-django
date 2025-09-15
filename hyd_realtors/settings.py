@@ -7,16 +7,22 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+SECRET_KEY = 'koh1lie^h%vwuwdq9agc8h2u+-rsftvgffgkg*&jbu58x0fw*2'
+DEBUG = False  # Production mode
 
 # Allowed hosts and CSRF
-ALLOWED_HOSTS = ['your-app.up.railway.app', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://your-app.up.railway.app']
+ALLOWED_HOSTS = [
+    'your-app.up.railway.app',  # replace with your Railway domain
+    'localhost',
+    '127.0.0.1',
+]
+CSRF_TRUSTED_ORIGINS = [
+    'https://your-app.up.railway.app',
+]
 
-# ReCAPTCHA
-RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY', '')
-RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY', '')
+# ReCAPTCHA keys (your input)
+RECAPTCHA_PUBLIC_KEY = '6Lf3MpwrAAAAAPsCl4n1SCVQnyTGrQlvpIJbkKED'
+RECAPTCHA_PRIVATE_KEY = '6Lf3MpwrAAAAABD8KL82skPE0t3JKQuZrg7ITxIA'
 
 # Application definition
 INSTALLED_APPS = [
@@ -36,7 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # serve static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -65,7 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hyd_realtors.wsgi.application'
 
-# Database: use Railway's DATABASE_URL if provided
+# Database
 DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
@@ -100,12 +106,12 @@ MEDIA_URL = '/media/'
 # Messages
 MESSAGE_TAGS = {messages.ERROR: 'danger'}
 
-# Email configuration
+# Email configuration (your input, can set env vars later for security)
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_USER = ''  # add your Gmail here
+EMAIL_HOST_PASSWORD = ''  # add your Gmail password/app password
 EMAIL_USE_TLS = True
 
-# Default primary key field type
+# Default primary key
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
