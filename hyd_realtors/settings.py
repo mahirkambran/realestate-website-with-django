@@ -28,7 +28,7 @@ SECRET_KEY = 'koh1lie^h%vwuwdq9agc8h2u+-rsftvgffgkg*&jbu58x0fw*2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["realestate-website-with-django-2.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["realestate-website-with-django-4.onrender.com", "localhost", "127.0.0.1"]
 
 
 RECAPTCHA_PUBLIC_KEY = '6Lf3MpwrAAAAAPsCl4n1SCVQnyTGrQlvpIJbkKED'
